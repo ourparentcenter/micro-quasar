@@ -1,6 +1,9 @@
 # micro-quasar
 Demo app of micro front-end using quasar &amp; single-spa
 
+# Contents
+- 3 quasar v2 apps (header, left-drawer, main)
+- Single-spa app (root)
 ## Usage
 - yarn or npm install in all apps (header, left-drawer, main, root)
 - add quasar to global packages
