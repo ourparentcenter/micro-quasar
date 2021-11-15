@@ -1,0 +1,33 @@
+<single-spa-router>
+  <!--
+
+    This is the single-spa Layout Definition for your microfrontends.
+    See https://single-spa.js.org/docs/layout-definition/ for more information.
+
+  -->
+
+  <!-- Example layouts you might find helpful:
+
+  <nav>
+    <application name="@org/navbar"></application>
+  </nav>
+  <route path="settings">
+    <application name="@org/settings"></application>
+  </route>
+
+  -->
+  <!-- <div class="q-layout q-layout--standard" style="min-height: 1393px"> -->
+  <!-- <application name="@mfq/header"></application> -->
+
+  <main>
+    <application name="@mfq/left-drawer"></application>
+    <application name="@mfq/header"></application>
+    <route path="/">
+      <application name="@mfq/main"></application>
+    </route>
+    <route path="app">
+      <application name="@single-spa/welcome"></application>
+    </route>
+  </main>
+  <!-- </div> -->
+</single-spa-router>

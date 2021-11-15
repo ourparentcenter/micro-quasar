@@ -1,0 +1,31 @@
+{
+  "name": "micro-quasar",
+  "version": "1.0.0",
+  "description": "Demo app of micro front-end using quasar & single-spa",
+  "productName": "Quasar App",
+  "author": "Matthew Marino <matthew.asdos@gmail.com>",
+  "private": true,
+  "scripts": {
+  },
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+  },
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 12.22.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}
