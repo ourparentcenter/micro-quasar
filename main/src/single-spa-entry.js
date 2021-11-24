@@ -25,7 +25,7 @@ const vueLifecycles = singleSpaVue({
     app.use(Quasar, quasarUserOptions);
     app.use(routerInstance);
   },
-  replaceMode: true
+  replaceMode: true,
 });
 
 export const bootstrap = vueLifecycles.bootstrap;

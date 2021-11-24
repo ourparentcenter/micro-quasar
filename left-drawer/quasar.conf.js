@@ -134,6 +134,14 @@ module.exports = configure(function (ctx) {
             replace: '[Quasar] Running Left-Drawer SPA.',
           },
         });
+        cfg.module.rules.push({
+          test: /\.js$/,
+          loader: 'string-replace-loader',
+          options: {
+            search: 'app.use(router)',
+            replace: '//app.use(router)',
+          },
+        });
       },
     },
 

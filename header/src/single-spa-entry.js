@@ -3,16 +3,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { h, createApp } from 'vue';
-import qcreateApp from '../.quasar/app.js';
+// import qcreateApp from '../.quasar/app.js';
 import singleSpaVue from 'single-spa-vue';
 import { Quasar } from 'quasar';
 import quasarUserOptions from '../.quasar/quasar-user-options';
 import App from './App.vue';
 
-let routerInstance;
+/* let routerInstance;
 void qcreateApp(createApp, quasarUserOptions).then(({ router }) => {
   routerInstance = router;
-});
+}); */
 
 const vueLifecycles = singleSpaVue({
   createApp,
@@ -23,9 +23,9 @@ const vueLifecycles = singleSpaVue({
   },
   handleInstance(app) {
     app.use(Quasar, quasarUserOptions);
-    app.use(routerInstance);
+    // app.use(routerInstance);
   },
-  replaceMode: true
+  replaceMode: true,
 });
 
 export const bootstrap = vueLifecycles.bootstrap;

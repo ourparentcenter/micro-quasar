@@ -1,4 +1,4 @@
-<single-spa-router>
+<single-spa-router mode="history" base="/">
   <!--
 
     This is the single-spa Layout Definition for your microfrontends.
@@ -25,7 +25,7 @@
     <route default>
       <application name="@mfq/main"></application>
     </route>
-    <route path="app">
+    <route path="/app" exact>
       <application name="@single-spa/welcome"></application>
     </route>
   </main>
