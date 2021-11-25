@@ -18,10 +18,10 @@ const toggle = ref(false);
 const leftDrawerClass = computed(() => {
   return toggle.value === true
     ? {
-        class: 'leftMarginRemove',
+        class: 'bodyLeftMarginRemove',
       }
     : {
-        class: 'leftMargin',
+        class: 'bodyLeftMargin',
       };
 });
 const onToggleBody = () => {
@@ -33,6 +33,11 @@ window['onToggleBody'] = () => onToggleBody();
 </script>
 <style lang="scss" scoped>
 .changeHeight {
-  min-height: 50px !important;
+	min-height: 50px !important;
 }
-</style>
+.bodyLeftMargin {
+	margin-left: 300px;
+}
+.bodyLeftMarginRemove {
+	margin-left: 0;
+}
