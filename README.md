@@ -1,5 +1,6 @@
 # micro-quasar
-Demo app of micro front-end using quasar &amp; single-spa
+****Not suitable for production use, meant only as a demo to show possibilities.**
+Demo app of micro front-end using quasar &amp; single-spa.
 
 # Contents
 - 3 quasar v2 apps (header, left-drawer, main)
@@ -14,6 +15,9 @@ Demo app of micro front-end using quasar &amp; single-spa
 This demo uses 3 quasar apps & single-spa as root. You may notice that the header & left drawer apps have empty routes, this is intentional. Quasar has yet a way to completely remove vue-router so any links to apps & sub routes ot apps will be taken over by header or left-drawer if routes are present. Routing to sub routes within apps works as long as another app doesn't have the path specified in it's routes file, so when constructing your single-spa quasar app plan your routing wisely.
 
 Since quasar auto creates the app.js & client-entry.js files I had to use string-replace-loader webpack plugin to modify the compiled files and comment out the `.then(start)` section of the client-entry.js file so that the error in devtools of #q-app element not being found went away. This doesn't seem to have an impact on functionality.
+
+### Boot files
+This demo doesn't take boot files into account. It was reported that boot files are not loading due to the string replace of `.then(start)`. The solutoin to this should be changing the target in quasar config file from `test: /\.js$/` to `test: /(\b(\w*client-entry\w*)\b)+.js$/` so that only the `client-entry.js` file is targed.
 
 ## Important note on routing
 The single-spa-entry.js file can pull in the router routes from an app. an example of this in in the main app where single-sp-entry.js contains teh following lines:
