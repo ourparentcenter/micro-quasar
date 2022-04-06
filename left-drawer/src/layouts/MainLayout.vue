@@ -1,6 +1,12 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="changeHeight">
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer
+      v-model="store.leftDrawerOpen"
+      show-if-above
+      side="left"
+      behavior="desktop"
+      bordered
+    >
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
@@ -11,13 +17,18 @@
         />
       </q-list>
       <hr />
-      <a href="/" onclick="singleSpaNavigate(event)">Home</a>
+      <q-list>
+        <q-item-label header> App Links </q-item-label>
+
+        <EssentialLink
+          v-for="link in appLinks"
+          :key="link.title"
+          v-bind="link"
+        />
+      </q-list>
       <hr />
-      <a href="test" onclick="singleSpaNavigate(event)">Main App sub route</a>
-      <hr />
-      <a href="app" onclick="singleSpaNavigate(event)">App 1</a>
-      <hr />
-      <!-- <router-link to="/app">App 1</router-link> -->
+      <q-btn @click="store.toggleLeftDrawer">toggle</q-btn>
+      <q-btn @click="store2.toggle()"> mapped action toggle</q-btn>
     </q-drawer>
   </q-layout>
 </template>
@@ -27,9 +38,13 @@ export default {
   name: 'MainLayout',
 };
 </script>
+
 <script setup lang="ts">
 import EssentialLink from 'components/EssentialLink.vue';
-import { ref } from 'vue';
+import { useLeftDrawerStore } from 'stores/leftDrawerStore';
+import { computedActions } from 'src/utility/leftDrawerStoreEX';
+const store = useLeftDrawerStore();
+const store2 = computedActions.value;
 const essentialLinks = [
   {
     title: 'Docs',
@@ -74,23 +89,41 @@ const essentialLinks = [
     link: 'https://awesome.quasar.dev',
   },
 ];
-const leftDrawerOpen = ref(false);
-
-const toggleLeftDrawer = () => {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  window['onToggle']();
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  window['onToggleBody']();
-};
+const appLinks = [
+  {
+    title: 'Home',
+    caption: 'SPA root app home "/"',
+    icon: 'home',
+    link: '/',
+    internal: true,
+  },
+  {
+    title: 'Main App sub route',
+    caption: 'Main App sub route "/test"',
+    icon: 'subdirectory_arrow_right',
+    link: 'test',
+    internal: true,
+  },
+  {
+    title: 'App 1',
+    caption: 'Different single-spa app route "/app"',
+    icon: 'pages',
+    link: 'app',
+    internal: true,
+  },
+  {
+    title: 'Non exsisting route',
+    caption: 'Non exsisting route error page "/test2"',
+    icon: 'record_voice_over',
+    link: 'test2',
+    internal: true,
+  },
+];
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-window['leftDrawerToggle'] = () => toggleLeftDrawer();
+window['leftDrawerToggle'] = () => store2.toggle();
 </script>
+
 <style lang="scss" scoped>
 .changeHeight {
   min-height: 50px !important;

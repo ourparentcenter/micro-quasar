@@ -1,11 +1,13 @@
-# micro-quasar
+# micro-quasar v2
 ****Not suitable for production use, meant only as a demo to show possibilities.**
 
-Demo app of micro front-end using quasar &amp; single-spa.
+Demo app of micro front-end using quasar &amp; single-spa with boot files and Pinia state store. This demo also makes use of browser modules by importing a function from main and left drawer apps into teh header app. This aloows direct manipulation of the states for both apps.
 
 # Contents
 - 3 quasar v2 apps (header, left-drawer, main)
+- Pinia store
 - Single-spa app (root)
+
 ## Usage
 - yarn or npm install in all apps (header, left-drawer, main, root)
 - add quasar to global packages
@@ -18,7 +20,7 @@ This demo uses 3 quasar apps & single-spa as root. You may notice that the heade
 Since quasar auto creates the app.js & client-entry.js files I had to use string-replace-loader webpack plugin to modify the compiled files and comment out the `.then(start)` section of the client-entry.js file so that the error in devtools of #q-app element not being found went away. This doesn't seem to have an impact on functionality.
 
 ### Boot files
-This demo doesn't take boot files into account. It was reported that boot files are not loading due to the string replace of `.then(start)`. The solutoin to this should be changing the target in quasar config file from `test: /\.js$/` to `test: /(\b(\w*client-entry\w*)\b)+.js$/` so that only the `client-entry.js` file is targed.
+This demo takes boot files into account. It was originally reported that boot files were not loading due to the string replace of `.then(start)`. The solution to this was changing the target in quasar config file from `test: /\.js$/` to `test: /(\b(\w*client-entry\w*)\b)+.js$/` so that only the `client-entry.js` file is targed.
 
 ## Important note on routing
 The single-spa-entry.js file can pull in the router routes from an app. an example of this in in the main app where single-sp-entry.js contains teh following lines:
@@ -33,12 +35,13 @@ void qcreateApp(createApp, quasarUserOptions).then(({ router }) => {
   routerInstance = router;
 });
 ```
-what is happeningn her is that we are using teh app.js method to create an instance of the router then using the router in the app with app.use:
+what is happeningn her is that we are using the app.js method to create an instance of the router then using the router in the app with app.use:
 
 ```js
 handleInstance(app) {
   app.use(Quasar, quasarUserOptions);
   app.use(routerInstance);
+  app.use(createPinia());
 },
 ```
 

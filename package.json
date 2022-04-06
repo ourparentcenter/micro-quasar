@@ -1,17 +1,13 @@
 {
-  "name": "micro-quasar",
+  "name": "micro-quasarv2",
   "version": "1.0.0",
   "description": "Demo app of micro front-end using quasar & single-spa",
-  "productName": "Quasar App",
+  "productName": "Micro-quasarv2",
   "author": "Matthew Marino <matthew.asdos@gmail.com>",
   "private": true,
-  "scripts": {
-  },
-  "dependencies": {
-    
-  },
-  "devDependencies": {
-  },
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
   "browserslist": [
     "last 10 Chrome versions",
     "last 10 Firefox versions",

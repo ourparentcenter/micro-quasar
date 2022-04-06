@@ -13,10 +13,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-const toggle = ref(false);
+import { computed } from 'vue';
+import { useMainStore } from 'src/stores/mainStore';
+import { computedActions } from 'src/utility/mainStoreEX';
+const store = useMainStore();
+const store2 = computedActions.value;
 const leftDrawerClass = computed(() => {
-  return toggle.value === true
+  return store.mainOpen === true
     ? {
         class: 'bodyLeftMarginRemove',
       }
@@ -24,20 +27,19 @@ const leftDrawerClass = computed(() => {
         class: 'bodyLeftMargin',
       };
 });
-const onToggleBody = () => {
-  toggle.value = !toggle.value;
-};
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-window['onToggleBody'] = () => onToggleBody();
+window['onToggleBody'] = () => store2.toggle();
 </script>
+
 <style lang="scss" scoped>
 .changeHeight {
-	min-height: 50px !important;
+  min-height: 50px !important;
 }
 .bodyLeftMargin {
-	margin-left: 300px;
+  margin-left: 14.7%;
 }
 .bodyLeftMarginRemove {
-	margin-left: 0;
+  margin-left: 0;
 }
+</style>

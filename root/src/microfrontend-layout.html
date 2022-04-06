@@ -16,12 +16,14 @@
   </route>
 
   -->
-  <!-- <div class="q-layout q-layout--standard" style="min-height: 1393px"> -->
-  <!-- <application name="@mfq/header"></application> -->
 
-  <main>
+  <leftdrawer>
     <application name="@mfq/left-drawer"></application>
+  </leftdrawer>
+  <header>
     <application name="@mfq/header"></application>
+  </header>
+  <main>
     <route default>
       <application name="@mfq/main"></application>
     </route>
@@ -29,5 +31,4 @@
       <application name="@single-spa/welcome"></application>
     </route>
   </main>
-  <!-- </div> -->
 </single-spa-router>
