@@ -1,6 +1,8 @@
 # micro-quasar
 ****Not suitable for production use, meant only as a demo to show possibilities.**
 
+****See [v2 branch](https://github.com/ourparentcenter/micro-quasar/tree/v2) for updated demo that includes bootfile support and more examples of single-spa features
+
 Demo app of micro front-end using quasar &amp; single-spa.
 
 # Contents
