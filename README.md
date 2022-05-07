@@ -9,7 +9,7 @@ Demo app of micro front-end using quasar &amp; single-spa with boot files and Pi
 - Single-spa app (root)
 
 ## Usage
-- yarn or npm install in all apps (header, left-drawer, main, root)
+- yarn or npm install in all apps (header, left-drawer, main, root) - this project makes use of yarn natively and a prepare command has been added to project base package.json for convenience. If you are using npm then you must npm install in each app folder manually.
 - add quasar to global packages
 - start each app (quasar dev for all save root app, yarn or npm start in root app)
 - browse to http://localhost:9000
@@ -25,7 +25,7 @@ This demo takes boot files into account. It was originally reported that boot fi
 More recent versions of quasar, when using pinia, seem to add `app.mount('#q-app')` to the client-entry.js file. The behavior of how the client-entry.js is created also seems to depend on if you select pinia or other modules during project creation so, look at the client-entry.js and adjust the string replace to suit you needs.
 
 ## Important note on routing
-The single-spa-entry.js file can pull in the router routes from an app. an example of this in in the main app where single-sp-entry.js contains teh following lines:
+The single-spa-entry.js file can pull in the router routes from an app. an example of this in in the main app where single-sp-entry.js contains the following lines:
 
 ```js
 import qcreateApp from '../.quasar/app.js';

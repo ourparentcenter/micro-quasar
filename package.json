@@ -5,7 +5,13 @@
   "productName": "Micro-quasarv2",
   "author": "Matthew Marino <matthew.asdos@gmail.com>",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "prepare": "yarn run prepHeader && yarn run prepLeftDrawer && yarn run prepMain && yarn run prepRoot",
+    "prepHeader": "cd header && yarn install && cd ..",
+    "prepLeftDrawer": "cd left-drawer && yarn install && cd ..",
+    "prepMain": "cd main && yarn install && cd ..",
+    "prepRoot": "cd root && yarn install && cd .."
+  },
   "dependencies": {},
   "devDependencies": {},
   "browserslist": [
