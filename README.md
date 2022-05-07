@@ -1,7 +1,7 @@
 # micro-quasar v2
 ****Not suitable for production use, meant only as a demo to show possibilities.**
 
-Demo app of micro front-end using quasar &amp; single-spa with boot files and Pinia state store. This demo also makes use of browser modules by importing a function from main and left drawer apps into teh header app. This aloows direct manipulation of the states for both apps.
+Demo app of micro front-end using quasar &amp; single-spa with boot files and Pinia state store. This demo also makes use of browser modules by importing a function from main and left drawer apps into the header app. This allows direct manipulation of the states for both apps.
 
 # Contents
 - 3 quasar v2 apps (header, left-drawer, main)
@@ -21,6 +21,7 @@ Since quasar auto creates the app.js & client-entry.js files I had to use string
 
 ### Boot files
 This demo takes boot files into account. It was originally reported that boot files were not loading due to the string replace of `.then(start)`. The solution to this was changing the target in quasar config file from `test: /\.js$/` to `test: /(\b(\w*client-entry\w*)\b)+.js$/` so that only the `client-entry.js` file is targed.
+More recent versions of quasar, when using pinia, seem to add `app.mount('#q-app')`. The behavior of how the client-entry.js is created also seems to depend on if you select pinia or other modules duirng project creation so, look at teh client-entry.js and adjust the string replace to suit you needs.
 
 ## Important note on routing
 The single-spa-entry.js file can pull in the router routes from an app. an example of this in in the main app where single-sp-entry.js contains teh following lines:
