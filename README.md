@@ -17,11 +17,12 @@ Demo app of micro front-end using quasar &amp; single-spa with boot files and Pi
 ### Info
 This demo uses 3 quasar apps & single-spa as root. You may notice that the header & left drawer apps have empty routes, this is intentional. Quasar has yet a way to completely remove vue-router so any links to apps & sub routes ot apps will be taken over by header or left-drawer if routes are present. Routing to sub routes within apps works as long as another app doesn't have the path specified in it's routes file, so when constructing your single-spa quasar app plan your routing wisely.
 
-Since quasar auto creates the app.js & client-entry.js files I had to use string-replace-loader webpack plugin to modify the compiled files and comment out the `.then(start)` section of the client-entry.js file so that the error in devtools of #q-app element not being found went away. This doesn't seem to have an impact on functionality.
+Since quasar auto creates the app.js & client-entry.js files I had to use string-replace-loader webpack plugin to modify the compiled files and comment out the `.then(start)` section of the client-entry.js file so that the error in devtools of `#q-app` element not being found went away. This doesn't seem to have an impact on functionality.
 
 ### Boot files
 This demo takes boot files into account. It was originally reported that boot files were not loading due to the string replace of `.then(start)`. The solution to this was changing the target in quasar config file from `test: /\.js$/` to `test: /(\b(\w*client-entry\w*)\b)+.js$/` so that only the `client-entry.js` file is targed.
-More recent versions of quasar, when using pinia, seem to add `app.mount('#q-app')`. The behavior of how the client-entry.js is created also seems to depend on if you select pinia or other modules duirng project creation so, look at teh client-entry.js and adjust the string replace to suit you needs.
+
+More recent versions of quasar, when using pinia, seem to add `app.mount('#q-app')` to the client-entry.js file. The behavior of how the client-entry.js is created also seems to depend on if you select pinia or other modules during project creation so, look at the client-entry.js and adjust the string replace to suit you needs.
 
 ## Important note on routing
 The single-spa-entry.js file can pull in the router routes from an app. an example of this in in the main app where single-sp-entry.js contains teh following lines:
