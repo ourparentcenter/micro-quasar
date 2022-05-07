@@ -11,8 +11,9 @@
       rel="stylesheet"
       type="text/css"
     />
+    <!-- Quasar css -->
     <link
-      href="https://cdn.jsdelivr.net/npm/quasar@2.3.1/dist/quasar.prod.css"
+      href="https://cdn.jsdelivr.net/npm/quasar@2.6.6/dist/quasar.prod.css"
       rel="stylesheet"
       type="text/css"
     />
@@ -29,7 +30,7 @@
   -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';"
+      content="default-src 'self' https: *:*; script-src 'unsafe-inline' 'unsafe-eval' https: *:*; connect-src https: *:* *:* ws://*:*; style-src 'unsafe-inline' https:; object-src 'none';"
     />
     <meta name="importmap-type" content="systemjs-importmap" />
     <!-- If you wish to turn off import-map-overrides for specific environments (prod), uncomment the line below -->
@@ -44,30 +45,26 @@
 
     More information about shared dependencies can be found at https://single-spa.js.org/docs/recommended-setup#sharing-with-import-maps.
   -->
-    <!-- <script type="systemjs-importmap">
-      {
-        "imports": {
-          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
-          "vue": "https://cdn.jsdelivr.net/npm/vue@3.2.21/dist/vue.global.prod.js",
-          "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@4.0.12/dist/vue-router.global.min.js",
-          "axios": "https://cdn.jsdelivr.net/npm/axios@0.24.0/dist/axios.min.js",
-          "quasar": "https://cdn.jsdelivr.net/npm/quasar@2.2.2/dist/quasar.umd.prod.min.js"
-        }
-      }
-    </script> -->
     <script type="systemjs-importmap">
       {
         "imports": {
-          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
-          "quasar": "https://cdn.jsdelivr.net/npm/quasar@2.2.2/dist/quasar.umd.prod.min.js"
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.3/lib/system/single-spa.min.js",
+          "vue": "https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.min.js",
+          "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@4.0.14/dist/vue-router.global.min.js",
+          "vue-i18n": "https://cdn.jsdelivr.net/npm/vue-i18n@9.0.0/dist/vue-i18n.global.min.js",
+          "quasar": "https://cdn.jsdelivr.net/npm/quasar@2.6.6/dist/quasar.umd.js"
         }
       }
     </script>
     <link
       rel="preload"
-      href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
+      href="https://cdn.jsdelivr.net/npm/single-spa@5.9.3/lib/system/single-spa.min.js"
       as="script"
+      crossOrigin="anonymous"
     />
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@4.0.14/dist/vue-router.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-i18n@9.0.0/dist/vue-i18n.global.min.js"></script>
 
     <!-- Add your organization's prod import map URL to this script's src  -->
     <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
@@ -77,10 +74,10 @@
       {
         "imports": {
           "@single-spa/welcome": "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
+          "@mfq/root-config": "//localhost:9000/mfq-root-config.js",
           "@mfq/left-drawer": "//localhost:8080/app.js",
-          "@mfq/header": "//localhost:8081/app.js",
           "@mfq/main": "//localhost:8082/app.js",
-          "@mfq/root-config": "//localhost:9000/mfq-root-config.js"
+          "@mfq/header": "//localhost:8081/app.js"
         }
       }
     </script>
@@ -94,19 +91,30 @@
 
     <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
     <% if (isLocal) { %>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.12.1/dist/system.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.12.1/dist/extras/amd.js"></script>
     <% } else { %>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.12.1/dist/system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.12.1/dist/extras/amd.min.js"></script>
     <% } %>
   </head>
   <body>
     <noscript> You need to enable JavaScript to run this app. </noscript>
     <script>
-      System.import("@mfq/left-drawer");
-      System.import("@mfq/header");
-      System.import("@mfq/root-config");
+      // resolve vue, vue-router, vue-i18n, and add to window with correct global varaible
+      Object.getPrototypeOf(System).firstGlobalProp = true;
+      System.set(System.resolve('vue'), window.Vue);
+      System.set(System.resolve('vue-router'), window.VueRouter);
+      System.set(System.resolve('vue-i18n'), window.VueI18n);
+      // load single-spa
+      System.import('single-spa');
+      // load quasar
+      System.import('quasar');
+      // load single-spa apps
+      System.import('@mfq/root-config');
+      System.import('@mfq/left-drawer');
+      System.import('@mfq/main');
+      System.import('@mfq/header');
     </script>
     <import-map-overrides-full
       show-when-local-storage="devtools"

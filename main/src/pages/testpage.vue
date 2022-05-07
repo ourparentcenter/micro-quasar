@@ -5,9 +5,9 @@
 </template>
 <script lang="ts">
 export default {
-  name: 'TestPage'
-}
+  name: 'TestPage',
+};
 </script>
 <script setup lang="ts">
-import testComponent from 'components/testComponent.vue'
+import testComponent from 'components/testComponent.vue';
 </script>

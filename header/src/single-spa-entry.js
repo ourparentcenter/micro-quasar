@@ -8,6 +8,7 @@ import singleSpaVue from 'single-spa-vue';
 import { Quasar } from 'quasar';
 import quasarUserOptions from '../.quasar/quasar-user-options';
 import App from './App.vue';
+import { createPinia } from 'pinia';
 
 /* let routerInstance;
 void qcreateApp(createApp, quasarUserOptions).then(({ router }) => {
@@ -24,6 +25,7 @@ const vueLifecycles = singleSpaVue({
   handleInstance(app) {
     app.use(Quasar, quasarUserOptions);
     // app.use(routerInstance);
+    app.use(createPinia());
   },
   replaceMode: true,
 });

@@ -8,6 +8,8 @@ import singleSpaVue from 'single-spa-vue';
 import { Quasar } from 'quasar';
 import quasarUserOptions from '../.quasar/quasar-user-options';
 import App from './App.vue';
+import { computedActions } from 'src/utility/leftDrawerStoreEX';
+import { createPinia } from 'pinia';
 
 /* let routerInstance;
 void qcreateApp(createApp, quasarUserOptions).then(({ router }) => {
@@ -24,6 +26,7 @@ const vueLifecycles = singleSpaVue({
   handleInstance(app) {
     app.use(Quasar, quasarUserOptions);
     // app.use(routerInstance);
+    app.use(createPinia());
   },
   replaceMode: true,
 });
@@ -31,3 +34,6 @@ const vueLifecycles = singleSpaVue({
 export const bootstrap = vueLifecycles.bootstrap;
 export const mount = vueLifecycles.mount;
 export const unmount = vueLifecycles.unmount;
+export function leftDrawerToggle() {
+  return computedActions.value.toggle();
+}

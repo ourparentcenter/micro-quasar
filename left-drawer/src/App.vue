@@ -1,12 +1,13 @@
 <template>
-  <!-- <router-view /> -->
   <layout />
 </template>
+
 <script lang="ts">
 export default {
-  name: 'Leftdrawer'
-}
+  name: 'LeftDrawer',
+};
 </script>
+
 <script setup lang="ts">
-import layout from 'layouts/MainLayout.vue'
+import layout from 'layouts/MainLayout.vue';
 </script>

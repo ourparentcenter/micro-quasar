@@ -5,10 +5,8 @@
 </template>
 <script lang="ts">
 export default {
-  name: 'test Component'
-}
+  name: 'testComponent',
+};
 </script>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
