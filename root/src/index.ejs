@@ -11,8 +11,9 @@
       rel="stylesheet"
       type="text/css"
     />
+    <!-- Quasar css -->
     <link
-      href="https://cdn.jsdelivr.net/npm/quasar@2.3.4/dist/quasar.prod.css"
+      href="https://cdn.jsdelivr.net/npm/quasar@2.6.6/dist/quasar.prod.css"
       rel="stylesheet"
       type="text/css"
     />
@@ -48,62 +49,27 @@
       {
         "imports": {
           "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.3/lib/system/single-spa.min.js",
-          "vue": "https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.prod.js",
-          "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@4.0.14/dist/vue-router.global.prod.js",
-          "vue-i18n": "https://cdn.jsdelivr.net/npm/vue-i18n@9.0.0/dist/vue-i18n.global.prod.js",
-          "quasar": "https://cdn.jsdelivr.net/npm/quasar@2.6.5/dist/quasar.umd.js"
+          "vue": "https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.min.js",
+          "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@4.0.14/dist/vue-router.global.min.js",
+          "vue-i18n": "https://cdn.jsdelivr.net/npm/vue-i18n@9.0.0/dist/vue-i18n.global.min.js",
+          "quasar": "https://cdn.jsdelivr.net/npm/quasar@2.6.6/dist/quasar.umd.js"
         }
       }
     </script>
-    <!-- <link
+    <link
       rel="preload"
       href="https://cdn.jsdelivr.net/npm/single-spa@5.9.3/lib/system/single-spa.min.js"
       as="script"
       crossOrigin="anonymous"
-    /> -->
-    <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.prod.js"
-      as="script"
-      crossOrigin="anonymous"
     />
-    <!-- <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/vue-router@4.0.14/dist/vue-router.esm-browser.js"
-      as="script"
-      crossOrigin="anonymous"
-    /> -->
-    <!-- <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/quasar@2.6.5/dist/quasar.umd.prod.min.js"
-      as="script"
-      crossOrigin="anonymous"
-    /> -->
-    <!-- <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/@quasar/extras@1.13.5/index.min.js"
-      as="script"
-      crossOrigin="anonymous"
-    /> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@4.0.14/dist/vue-router.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-i18n@9.0.0/dist/vue-i18n.global.min.js"></script>
 
     <!-- Add your organization's prod import map URL to this script's src  -->
     <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
 
     <% if (isLocal) { %>
-    <!-- <script type="systemjs-importmap">
-      {
-        "imports": {
-          "@single-spa/welcome": "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
-          "vue": "https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.prod.js",
-          "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@4.0.14/dist/vue-router.global.prod.js",
-          "quasar": "https://cdn.jsdelivr.net/npm/quasar@2.6.0/dist/quasar.umd.prod.min.js",
-          "@mfq/root-config": "//localhost:9000/mfq-root-config.js",
-          "@mfq/left-drawer": "//localhost:8080/app.js",
-          "@mfq/header": "//localhost:8081/app.js",
-          "@mfq/main": "//localhost:8082/app.js"
-        }
-      }
-    </script> -->
     <script type="systemjs-importmap">
       {
         "imports": {
@@ -116,12 +82,6 @@
       }
     </script>
     <% } %>
-
-    <!-- <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/vue-router@4.0.14/dist/vue-router.global.prod.js"
-      as="script"
-    /> -->
 
     <!--
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
@@ -141,12 +101,16 @@
   <body>
     <noscript> You need to enable JavaScript to run this app. </noscript>
     <script>
+      // resolve vue, vue-router, vue-i18n, and add to window with correct global varaible
+      Object.getPrototypeOf(System).firstGlobalProp = true;
+      System.set(System.resolve('vue'), window.Vue);
+      System.set(System.resolve('vue-router'), window.VueRouter);
+      System.set(System.resolve('vue-i18n'), window.VueI18n);
+      // load single-spa
       System.import('single-spa');
-      System.import('vue');
-      System.import('vue-router');
-      System.import('vue-i18n');
+      // load quasar
       System.import('quasar');
-      // System.import('@quasar/extras');
+      // load single-spa apps
       System.import('@mfq/root-config');
       System.import('@mfq/left-drawer');
       System.import('@mfq/main');

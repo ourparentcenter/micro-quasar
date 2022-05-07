@@ -12,18 +12,18 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.13.5",
+    "@quasar/extras": "^1.13.6",
     "axios": "^0.26.1",
     "core-js": "^3.21.1",
     "pinia": "^2.0.13",
     "pinia-plugin-persistedstate": "^1.5.1",
-    "quasar": "^2.6.5",
+    "quasar": "^2.6.6",
     "vue": "^3.2.31",
     "vue-i18n": "^9.0.0",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
-    "@quasar/app-webpack": "^3.4.7",
+    "@quasar/app-webpack": "^3.5.1",
     "@types/node": "^17.0.23",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
