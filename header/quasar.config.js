@@ -153,7 +153,7 @@ module.exports = configure(function (ctx) {
         type: 'http',
       },
       port: 8081,
-      open: true, // opens browser window automatically
+      open: false, // opens browser window automatically
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
